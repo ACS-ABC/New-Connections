@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, render_template, request, flash
-from models import Post, User, Comment, Like
+from FlaskApp.models import Post, User, Comment, Like
 
 main = Blueprint('main', __name__)
 

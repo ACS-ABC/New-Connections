@@ -23,12 +23,12 @@ class User(db.Model):
 class Post(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   time_created = db.Column(db.DateTime)
-  #category
+  # #category
   title = db.Column(db.String, nullable=False)
   description = db.Column(db.String, nullable=False)
-  #photo
-  owner = db.Column(db.Integer, db.ForeignKey('user.id', nullable=False))
-  likes = db.Column(db.Integer)
+  # #photo
+  owner = db.Column(db.Integer, db.ForeignKey('user.id'))
+  likes = db.Column(db.Integer, db.ForeignKey('like.id'))
   def __str__(self):
     return
 
@@ -55,3 +55,4 @@ class Like(db.Model):
 
   def __repr__(self):
     return
+    
