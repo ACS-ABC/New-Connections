@@ -9,6 +9,7 @@ class User(db.Model):
   name = db.Column(db.String, nullable=True)
   age = db.Column(db.String, nullable=True)
   profile_bio = db.Column(db.String, nullable=True)
+  # location = db.Column()
   # profile_picture = db.Column()
   #make a table that fxns like genres for user_interests 
   

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{user.username}}'s feed
+{% endblock %}
+
+{% block content %}
+
+  {% for post in posts %}
+  <!-- post content here 
+  post.time_created
+  post.title
+  post.description
+  post.owner
+  post.likes
+  -->
+  {% endfor %}
+
+{% endblock %}
