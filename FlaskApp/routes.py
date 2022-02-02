@@ -1,15 +1,23 @@
 from flask import Flask, Blueprint, render_template, request, flash
+from FlaskApp.forms import LoginForm
 from FlaskApp.models import Post, User, Comment, Like
 
 main = Blueprint('main', __name__)
 
-@main.route('/', methods = ['GET', 'POST'])
-def home_page():
-  
+@main.route('/')
+def landing_page():
+  return render_template('landing_page.html')
+
+@main.route('/login', methods = ['GET', 'POST'])
+def login_page():
+  form = LoginForm()
   if request.method == 'POST':
-    pass
+    if form.validate_on_submit():
+      #query for login deets
+      pass
+
   else: 
-    return render_template('home_index.html')
+    return render_template('login_page.html', form=form)
 
 @main.route('/feed/<user_id>')
 def feed(user_id):
