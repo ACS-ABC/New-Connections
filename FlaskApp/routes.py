@@ -3,10 +3,13 @@ from FlaskApp.models import Post, User, Comment, Like
 
 main = Blueprint('main', __name__)
 
-@main.route('/')
+@main.route('/', methods = ['GET', 'POST'])
 def home_page():
-  """Return homepage."""
-  return render_template('home_index.html')
+  
+  if request.method == 'POST':
+    pass
+  else: 
+    return render_template('home_index.html')
 
 @main.route('/feed/<user_id>')
 def feed(user_id):
@@ -16,6 +19,7 @@ def feed(user_id):
 
 @main.route('/create-post/<user_id>', methods = ['GET', 'POST'])
 def create(user_id):
+  user = User.query.get(user_id)
   if request.method == 'POST':
     pass
   else: 
