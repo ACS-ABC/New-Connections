@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request, flash
+from flask import Flask, Blueprint, render_template, request, flash, redirect
 from FlaskApp.forms import LoginForm
 from FlaskApp.models import Post, User, Comment, Like
 
@@ -11,11 +11,15 @@ def landing_page():
 @main.route('/login', methods = ['GET', 'POST'])
 def login_page():
   form = LoginForm()
-  if request.method == 'POST':
-    if form.validate_on_submit():
-      #query for login deets
-      pass
-
+  if form.validate_on_submit():
+    user = User.query.filter_by(username=form.username)
+    if user:
+      if user.password == form.password:
+        user = user
+        return redirect(f'/feed/{user.id}')
+      else:
+        flash('username or password invalid')
+    pass
   else: 
     return render_template('login_page.html', form=form)
 
