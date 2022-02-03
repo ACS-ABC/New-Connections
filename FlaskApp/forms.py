@@ -9,7 +9,7 @@ class PostForm(FlaskForm):
   title = StringField('Post Title',
     validators=[
       DataRequired(),
-      Length(min=3, max = 50, messsage='Your Title needs to be within 3 and 50 characters')
+      Length(min=3, max = 50, message='Your Title needs to be within 3 and 50 characters')
     ])
   description = StringField('Post Description',
     validators=[
@@ -20,20 +20,24 @@ class PostForm(FlaskForm):
 
 class LoginForm(FlaskForm):
   username = StringField('Username',
-    DataRequired(),
-    Length(min=4, max=20, message=None))
+    validators=[
+      DataRequired(),
+      Length(min=4, max=20, message=None)])
   password = StringField('Password',
+    validators=[
     DataRequired(),
-    Length(min=4, max=20, message=None))
+    Length(min=4, max=20, message=None)])
   submit = SubmitField('Submit')
 
 class NewUserForm(FlaskForm):
   username = StringField('Username',
-    DataRequired(),
-    Length(min=4, max=20, message=None))
+    validators=[
+      DataRequired(),
+      Length(min=4, max=20, message=None)])
   password = StringField('Password',
-    DataRequired(),
-    Length(min=4, max=20, message=None))
+    validators=[
+      DataRequired(),
+      Length(min=4, max=20, message=None)])
   email = StringField('Email',
     validators=[
       DataRequired()
