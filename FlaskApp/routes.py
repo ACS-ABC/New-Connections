@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, render_template, request, flash, redirect
-from FlaskApp.forms import LoginForm, SignUpForm
+from FlaskApp.forms import CommentForm, LoginForm, PostForm, SignUpForm, EditAccountForm
 from FlaskApp.models import Post, User, Comment, Like
 from FlaskApp import db
 main = Blueprint('main', __name__)
@@ -40,22 +40,51 @@ def login_page():
   else: 
     return render_template('login_page.html', form=form)
 
-@main.route('/feed/<user_id>')
+@main.route('/feed/<user_id>', methods = ['GET', 'POST'])
 def display_feed(user_id):
   user = User.query.get(user_id)
   posts = Post.query.all()
+  form = CommentForm()
+  if form.validate_on_submit():
+    new_comment = Comment(
+      content = form.content.data,
+      author_id = user_id,
+      # post_id = somelogic
+    )
+    db.session.add(new_comment)
+    db.session.commit()
+    return
   return render_template('feed.html', posts=posts, user=user)
 
 @main.route('/create-post/<user_id>', methods = ['GET', 'POST'])
 def create_post(user_id):
   user = User.query.get(user_id)
-  if request.method == 'POST':
-    pass
-  else: 
-    return render_template('create_post.html')
+  form = PostForm()
+  if form.validate_on_submit():
+    new_post = Post(
+      time_created = form.time_created.data,
+      title = form.title.data,
+      description = form.title.data,
+      owner = user_id
+    )
+    db.session.add(new_post)
+    db.session.commit()
+    return redirect(f'/feed/{user_id}')
+   
+  return render_template('create_post.html')
 
 @main.route('/account-profile/<user_id>')
 def account_profile(user_id):
   user = User.query.get(user_id)
-  #ask christian on how to display edit vs noraml display
   return render_template('account_profile.html', user=user)
+
+@main.route('/account-profile/<user_id>/edit', methods = ['GET', 'POST'])
+def edit_profile(user_id):
+  user = User.query.get(user_id)
+  form = EditAccountForm(obj=user)
+  if form.validate_on_submit():
+    user.username = form.username.data
+    user.name = form.name.data
+    user.profile_bio = form.profile_bio.data
+    return redirect(f'/account-profile.html/{user_id}')
+  return render_template('edit_profile.html', user=user, form=form)

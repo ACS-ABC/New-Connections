@@ -15,7 +15,6 @@ class PostForm(FlaskForm):
     validators=[
       DataRequired()
     ])
-  owner = fields.QuerySelectField('Owner', query_factory=lambda: User.query, allow_blank=False)
   submit = SubmitField('Submit')
 
 class LoginForm(FlaskForm):
@@ -51,6 +50,18 @@ class SignUpForm(FlaskForm):
       DataRequired(),
       NumberRange(min=18,max=None,message='Must be above 18 yeard old')
       ])
+  profile_bio = StringField('Bio')
+  submit = SubmitField('Submit')
+
+class EditAccountForm(FlaskForm):
+  username = StringField('Username',
+    validators=[
+      DataRequired(),
+      Length(min=4, max=20, message=None)])
+  name = StringField('Name',
+    validators=[
+      DataRequired()
+    ])
   profile_bio = StringField('Bio')
   submit = SubmitField('Submit')
 
