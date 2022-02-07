@@ -2,5 +2,8 @@
 {% block title %}
 {% endblock %}
 {% block content %}
-{% include 'partials/credentials_form.html' %}
+<form action="/login">
+  {% include 'partials/form.html' %}
+</form>
+
 {% endblock %}
