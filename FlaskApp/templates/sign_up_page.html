@@ -2,7 +2,7 @@
 {% block title %}
 {% endblock %}
 {% block content %}
-{% extends "base.html" %} {% block title %} {% endblock %} {% block content %}
+
 <section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -29,7 +29,7 @@
                   id="typeEmailX"
                   class="form-control form-control-lg"
                   placeholder="Email"
-                />
+                />{{form.email}}
               </div>
 
               <div class="mb-4">
@@ -52,7 +52,7 @@
                 style="color: white; width: 220px;"
                 type="submit"
               >
-                Login
+                Sign-up
               </button>
 
               <div class="d-flex justify-content-center text-center mt-4 pt-1">
@@ -81,7 +81,7 @@
   </div>
   <img src="" alt="">
 </section>
-{% endblock %}
+
 
 <form action="/sign-up">
   {% include 'partials/form.html' %}
