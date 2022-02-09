@@ -1,12 +1,21 @@
 <ul class="nav justify-content-center">
+  {% if current_user.is_authenticated %}
   <li class="nav-item">
-    <a class="nav-link active link-dark" aria-current="page" href="#">Login</a>
+    <a class="nav-link link-dark" href="/account-profile/{{current_user.id}}">Profile</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link link-dark" href="#">Profile</a>
+    <a class="nav-link link-dark" href="/feed/{{current_user.id}}">Home</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link link-dark" href="#">Home</a>
+    <a class="nav-link link-dark" href="/create-post/{{current_user.id}}">Create Post</a>
   </li>
-  <button class="btn btn-dark ml-5">Sign Up</button>
+  <li class="nav-item">
+    <a class="nav-link link-dark" href="/logout">Logout</a>
+  </li>
+  {% else %}
+  <li class="nav-item">
+    <a class="nav-link active link-dark" aria-current="page" href="login">Login</a>
+  </li>
+  <a href="/sign-up"><button class="btn btn-dark ml-5">Sign Up</button></a>
+  {% endif %}
 </ul>
