@@ -3,17 +3,17 @@
 {% endblock %}
 {% block content %}
 
-
-<div class="intro grid-cell" style="margin-top: 200px; margin-left: 100px;">
-  <h1>New Connections</h1>
-  <div style="margin-right: 850px;">
-    <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h3>
+<div>
+  <div class="intro grid-cell" style="margin-top: 200px; margin-left: 100px;">
+    <h1>New Connections</h1>
+    <div style="margin-right: 850px;">
+      <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h3>
+    </div>
+    <button class="btn btn-dark">Get Started</button>
   </div>
-  <button class="btn btn-dark">Get Started</button>
-</div>
 
-<div class="imagestart grid-cell">
-  <img src="Gamer-removebg.png" class="rounded float-left" alt="Gamer">
+  <div class="imagestart grid-cell" classname="Gamer" >
+    <img src="{{url_for('static', filename='Gamer-removebg.png')}}" class="rounded float-left" alt="Gamer" style="max-width: 200px; max-height: 200px">
+  </div>
 </div>
-
 {% endblock %}
