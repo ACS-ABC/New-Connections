@@ -37,21 +37,22 @@ class SignUpForm(FlaskForm):
     validators=[
       DataRequired(),
       Length(min=4, max=20, message=None)])
-  email = StringField('Email',
-    validators=[
-      DataRequired()
-    ])
-  name = StringField('Name',
-    validators=[
-      DataRequired()
-    ])
-  age = IntegerField('Age',
-    validators=[
-      DataRequired(),
-      NumberRange(min=18,max=None,message='Must be above 18 yeard old')
-      ])
-  profile_bio = StringField('Bio')
+  # email = StringField('Email',
+  #   validators=[
+  #     DataRequired()
+  #   ])
+  # name = StringField('Name',
+  #   validators=[
+  #     DataRequired()
+  #   ])
+  # age = IntegerField('Age',
+  #   validators=[
+  #     DataRequired(),
+  #     NumberRange(min=18,max=None,message='Must be above 18 yeard old')
+  #     ])
+  # profile_bio = StringField('Bio')
   submit = SubmitField('Submit')
+  pass
 
 class EditAccountForm(FlaskForm):
   username = StringField('Username',
