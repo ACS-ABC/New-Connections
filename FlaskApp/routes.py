@@ -12,27 +12,26 @@ def landing_page():
 @main.route('/sign-up', methods = ['GET', 'POST'])
 def sign_up_page():
   form = SignUpForm()
-  if form.validate_on_submit():
+  if form.is_submitted():
     new_user = User(
-      username = form.username,
-      password = form.password,
-      email = form.email,
-      name = form.name,
-      age = form.age
+      username = form.username.data,
+      password = form.password.data
+      # email = form.email,
+      # name = form.name,
+      # age = form.age
     )
     db.session.add(new_user)
     db.session.commit()
     return redirect(f'/account-profile/{new_user.id}')
-    
   return render_template('sign_up_page.html', form=form)
 
 @main.route('/login', methods = ['GET', 'POST'])
 def login_page():
   form = LoginForm()
   if form.validate_on_submit():
-    user = User.query.filter_by(username=form.username)
+    user = User.query.filter_by(username=form.username.data)
     if user:
-      if user.password == form.password:
+      if user.password == form.password.data:
         login_user(user)
         return redirect(f'/feed/{user.id}')
       else:
@@ -66,13 +65,14 @@ def create_post(user_id):
       time_created = form.time_created.data,
       title = form.title.data,
       description = form.title.data,
-      owner = user_id
+      owner = user_id,
+      owner_name = current_user.username
     )
     db.session.add(new_post)
     db.session.commit()
     return redirect(f'/feed/{user_id}')
    
-  return render_template('create_post.html')
+  return render_template('create_post.html', form=form, user=current_user)
 
 @main.route('/account-profile/<user_id>')
 @login_required

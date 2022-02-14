@@ -6,18 +6,20 @@ class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String, nullable=False)
   password = db.Column(db.String, nullable=False)
-  email = db.Column(db.String, nullable=False)
-  name = db.Column(db.String, nullable=True)
-  age = db.Column(db.String, nullable=True)
-  profile_bio = db.Column(db.String, nullable=True)
+  # email = db.Column(db.String, nullable=True)
+  # name = db.Column(db.String, nullable=True)
+  # age = db.Column(db.String, nullable=True)
+  # profile_bio = db.Column(db.String, nullable=True)
   # location = db.Column()
   # profile_picture = db.Column()
   #make a table that fxns like genres for user_interests 
   
   def __str__(self):
+    self.username
     return
 
   def __repr__(self):
+    self.id
     return
 
 class Post(db.Model):
@@ -28,6 +30,7 @@ class Post(db.Model):
   description = db.Column(db.String, nullable=False)
   # #photo
   owner = db.Column(db.Integer, db.ForeignKey('user.id'))
+  owner_name = db.Column(db.String, nullable=False)
   likes = db.Column(db.Integer, db.ForeignKey('like.id'))
   def __str__(self):
     return
