@@ -31,10 +31,9 @@ def login_page():
   form = LoginForm()
   if form.validate_on_submit():
     user = User.query.filter_by(username=form.username)
-    login_user(user)
     if user:
       if user.password == form.password:
-        user = user
+        login_user(user)
         return redirect(f'/feed/{user.id}')
       else:
         flash('username or password invalid')
