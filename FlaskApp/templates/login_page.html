@@ -15,38 +15,20 @@
               </h2>
 
               <div class="form-outline form-white mb-4 ">
-                <div
-                  style="
+                <style>
+                  input{
                     background: none;
                     border: none;
+                    width: 100%;
                     border-bottom: 1px solid black;
                     border-radius: 0px;
-                  "
-                  id="typeUsernameX"
-                  class="form-control form-control-lg"
-                  type="text"
-                  placeholder="Username"
-                >{{form.username}}</div>
+                  }
+                </style>
+                {{form.username}}
               </div>
 
-<<<<<<< HEAD
               <div class="mb-4">
-                <div
-=======
-              <div class="mb-4">5
-                <input
->>>>>>> e752ff9ec13a01a12d94b708ec5e4db0886ee7ac
-                  style="
-                    background: none;
-                    border: none;
-                    border-bottom: 1px solid black;
-                    border-radius: 0px;
-                  "
-                  type="password"
-                  id="typePasswordX"
-                  class="form-control form-control-lg"
-                  placeholder="Password"
-                >{{form.password}}</div>
+                {{form.password}}
               </div>
 
               <p class="small mb-5 pb-lg-2">
@@ -55,8 +37,16 @@
 
               <div
                 class="btn btn-outline-dark btn-dark btn-lg"
-                style="color: white; width: 220px;"
               >
+              <style>
+                #submit{
+                  background: none;
+                  border: none;
+                  width: 100%;
+                  height: 100%;
+                  color: white; width: 220px;
+                }
+              </style>
                 {{form.submit}}
             </div>
           </form>
