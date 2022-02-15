@@ -3,17 +3,37 @@
 {% endblock %}
 {% block content %}
 
-<div>
-  <div class="intro grid-cell" style="margin-top: 200px; margin-left: 100px;">
-    <h1>New Connections</h1>
-    <div style="margin-right: 850px;">
-      <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h3>
-    </div>
-    <button class="btn btn-dark">Get Started</button>
-  </div>
+<div class="container">
 
-  <div class="imagestart grid-cell" classname="Gamer" >
-    <img src="{{url_for('static', filename='IMAGES/Gamer-removebg.png')}}" class="rounded float-left" alt="Gamer" style="max-width: 200px; max-height: 200px">
+  <div class="row">
+
+    <div class="col" style="margin-top: 140px;">
+      <h1>New Connections</h1>
+      <div>
+        <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h3>
+      </div>
+      <button class="btn btn-dark">Get Started</button>
+
+      <div class="imagestart grid-cell" classname="Lines" >
+        <img src="{{url_for('static', filename='IMAGES/lines.png')}}" class="rounded float-left" alt="Journal" style="max-width: 150px; max-height: 150px">
+      </div>
+    </div>
+
+
+    <div class="col" style="margin-top: 100px;">
+      <div class="imagestart grid-cell" classname="Gamer" >
+        <img src="{{url_for('static', filename='IMAGES/Gamer-removebg.png')}}" class="rounded float-left" alt="Gamer" style="max-width: 250px; max-height: 250px">
+      </div>
+      
+      <div class="imagestart grid-cell" classname="Gamer" >
+        <img src="{{url_for('static', filename='IMAGES/Journal-removebg.png')}}" class="rounded float-left" alt="Journal" style="max-width: 250px; max-height: 250px">
+      </div>
+
+      <div class="imagestart grid-cell" classname="Gamer" >
+        <img src="{{url_for('static', filename='IMAGES/Video-removebg.png')}}" class="rounded float-left" alt="Video" style="max-width: 250px; max-height: 250px">
+      </div>
+    </div>
   </div>
 </div>
+
 {% endblock %}
