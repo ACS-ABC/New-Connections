@@ -1,10 +1,18 @@
 from flask import Flask, Blueprint, render_template, request, flash, redirect
+from flask_login import LoginManager
 from FlaskApp.forms import CommentForm, LoginForm, PostForm, SignUpForm, EditAccountForm
 from FlaskApp.models import Post, User, Comment, Like
 from flask_login import current_user, login_required, login_user, logout_user
-from FlaskApp import db
+from FlaskApp import db, app
 main = Blueprint('main', __name__)
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+login_manager.init_app(app)
 
+
+@login_manager.user_loader
+def load_user(user_id):
+  return User.query.get(user_id)
 @main.route('/')
 def landing_page():
   return render_template('landing_page.html')
@@ -12,31 +20,31 @@ def landing_page():
 @main.route('/sign-up', methods = ['GET', 'POST'])
 def sign_up_page():
   form = SignUpForm()
-  if form.is_submitted():
+  if form.validate_on_submit():
     new_user = User(
       username = form.username.data,
-      password = form.password.data
-      # email = form.email,
-      # name = form.name,
-      # age = form.age
+      password = form.password.data,
+      email = 'None',
+      name = 'None',
+      age = 18
     )
     db.session.add(new_user)
     db.session.commit()
+    login_user(new_user)
     return redirect(f'/account-profile/{new_user.id}')
   return render_template('sign_up_page.html', form=form)
 
 @main.route('/login', methods = ['GET', 'POST'])
 def login_page():
   form = LoginForm()
-  if form.validate_on_submit():
-    user = User.query.filter_by(username=form.username.data)
+  if form.is_submitted():
+    user = User.query.filter_by(username=form.username.data).first()
     if user:
       if user.password == form.password.data:
         login_user(user)
         return redirect(f'/feed/{user.id}')
       else:
         flash('username or password invalid')
-    pass
   else: 
     return render_template('login_page.html', form=form)
 
@@ -66,7 +74,6 @@ def create_post(user_id):
       title = form.title.data,
       description = form.title.data,
       owner = user_id,
-      owner_name = current_user.username
     )
     db.session.add(new_post)
     db.session.commit()
@@ -95,5 +102,5 @@ def edit_profile(user_id):
 @main.route('/logout')
 @login_required
 def logout():
-  logout_user(current_user)
+  logout_user()
   return redirect('/')
