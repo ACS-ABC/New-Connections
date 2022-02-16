@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, Length, ValidationError, NumberRang
 from FlaskApp.models import Post, User, Comment
 
 class PostForm(FlaskForm):
-  time_created = DateField
+  time_created = DateField('Time of Event')
   title = StringField('Post Title',
     validators=[
       DataRequired(),
@@ -27,31 +27,24 @@ class LoginForm(FlaskForm):
     DataRequired(),
     Length(min=4, max=20, message=None)])
   submit = SubmitField('Submit')
+  def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if not user:
+            raise ValidationError('No user with that username. Please try again.')
 
+  def validate_password(self, password):
+    user = User.query.filter_by(username=self.username.data).first()
+    if user and user.password == password.data:
+      raise ValidationError('Password doesn\'t match. Please try again.')
 class SignUpForm(FlaskForm):
-  username = StringField('Username',
-    validators=[
-      DataRequired(),
-      Length(min=4, max=20, message=None)])
-  password = StringField('Password',
-    validators=[
-      DataRequired(),
-      Length(min=4, max=20, message=None)])
-  email = StringField('Email',
-    validators=[
-      DataRequired()
-    ])
-  name = StringField('Name',
-    validators=[
-      DataRequired()
-    ])
-  age = IntegerField('Age',
-    validators=[
-      DataRequired(),
-      NumberRange(min=18,max=None,message='Must be above 18 yeard old')
-      ])
-  profile_bio = StringField('Bio')
+  username = StringField('Username')
+  password = StringField('Password')
   submit = SubmitField('Submit')
+  
+  # def validate_username(self, username):
+  #   user = User.query.filter_by(username=username.data).first()
+  #   if user:
+  #     raise ValidationError('That username is taken. Please choose a different one.')
 
 class EditAccountForm(FlaskForm):
   username = StringField('Username',

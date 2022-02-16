@@ -1,12 +1,11 @@
 from FlaskApp import db
+from flask_login import UserMixin
 
-#set char limits
-
-class User(db.Model):
+class User(db.Model, UserMixin):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String, nullable=False)
   password = db.Column(db.String, nullable=False)
-  email = db.Column(db.String, nullable=False)
+  email = db.Column(db.String, nullable=True)
   name = db.Column(db.String, nullable=True)
   age = db.Column(db.String, nullable=True)
   profile_bio = db.Column(db.String, nullable=True)
@@ -15,9 +14,11 @@ class User(db.Model):
   #make a table that fxns like genres for user_interests 
   
   def __str__(self):
+    self.username
     return
 
   def __repr__(self):
+    self.id
     return
 
 class Post(db.Model):
