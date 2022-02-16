@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask import flash
 from wtforms import StringField, DateField, SelectField, SubmitField, IntegerField
 from wtforms_sqlalchemy import fields
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
@@ -27,15 +28,6 @@ class LoginForm(FlaskForm):
     DataRequired(),
     Length(min=4, max=20, message=None)])
   submit = SubmitField('Submit')
-  def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if not user:
-            raise ValidationError('No user with that username. Please try again.')
-
-  def validate_password(self, password):
-    user = User.query.filter_by(username=self.username.data).first()
-    if user and user.password == password.data:
-      raise ValidationError('Password doesn\'t match. Please try again.')
 class SignUpForm(FlaskForm):
   username = StringField('Username')
   password = StringField('Password')
