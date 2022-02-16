@@ -37,16 +37,17 @@ def sign_up_page():
 @main.route('/login', methods = ['GET', 'POST'])
 def login_page():
   form = LoginForm()
-  if form.is_submitted():
+  if form.validate_on_submit():
     user = User.query.filter_by(username=form.username.data).first()
     if user:
-      if user.password == form.password.data:
+      if user.password == form.password.data: 
         login_user(user)
         return redirect(f'/feed/{user.id}')
       else:
-        flash('username or password invalid')
-  else: 
-    return render_template('login_page.html', form=form)
+        flash('Password doesn\'t match. Please try again.') 
+    else:
+      flash('No user with that username. Please try again.')
+  return render_template('login_page.html', form=form)
 
 @main.route('/feed/<user_id>', methods = ['GET', 'POST'])
 def display_feed(user_id):
