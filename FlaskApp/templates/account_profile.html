@@ -19,7 +19,7 @@
               />
 
               <!-- PORFILE BUTTON -->
-              <button
+              <a href="/account-profile/{{user.id}}/edit"><button
                 type="button"
                 class="btn btn-outline-dark"
                 data-mdb-ripple-color="dark"
@@ -27,12 +27,13 @@
               >
                 Edit profile
               </button>
+            </a>
             </div>
 
             <!-- NAME  -->
             <div class="ms-3" style="margin-top: 130px">
-              <h5>Christian Thompson</h5>
-              <p>California</p>
+              <h5>{{user.name}}</h5>
+              <p>{{user.username}}</p>
             </div>
 
 
@@ -53,15 +54,16 @@
 
               <!-- ABOUT SECTION  -->
               <div class="p-4" style="background-color: #f8f9fa">
-                <p class="font-italic mb-1">Front End Web Developer</p>
-                <p class="font-italic mb-1">Lives in San Rafael</p>
-                <p class="font-italic mb-0">Likes Balusongs</p>
+                <p class="font-italic mb-1">{{user.profile_bio}}</p>
               </div>
 
             </div>
             <div class="d-flex justify-content-between align-items-center mb-4">
               <p class="lead fw-normal mb-0">Recent Posts</p>
             </div>
+            {% for post in posts %}
+              {{post.title}}
+            {% endfor %}
           </div>
         </div>
       </div>
