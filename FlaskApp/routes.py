@@ -71,10 +71,10 @@ def create_post(user_id):
   form = PostForm()
   if form.validate_on_submit():
     new_post = Post(
-      time_created = form.time_created.data,
+      time_created = form.time.data,
       title = form.title.data,
       description = form.title.data,
-      owner = user_id,
+      owner = user_id
     )
     db.session.add(new_post)
     db.session.commit()

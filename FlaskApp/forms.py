@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, Length, ValidationError, NumberRang
 from FlaskApp.models import Post, User, Comment
 
 class PostForm(FlaskForm):
-  time_created = DateField('Time of Event')
+  time = DateField('Time of Event')
   title = StringField('Post Title',
     validators=[
       DataRequired(),
