@@ -3,7 +3,8 @@
 {% endblock %}
 {% block content %}
 <div name='post-preview'>
-<form action="/sign-up" method="POST">
+<form action="/create-post/{{user.id}}" method="POST">
+  {{ form.csrf_token }}
   {{form.title}}
   {{form.time}}
   {{form.description}}
