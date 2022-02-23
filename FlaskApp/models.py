@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
   age = db.Column(db.String, nullable=True)
   profile_bio = db.Column(db.String, nullable=True)
   # location = db.Column()
-  # profile_picture = db.Column()
+  profile_picture = db.Column(db.String, nullable=True)
   #make a table that fxns like genres for user_interests 
   
   def __str__(self):
@@ -27,9 +27,9 @@ class Post(db.Model):
   # #category
   title = db.Column(db.String, nullable=False)
   description = db.Column(db.String, nullable=False)
-  # #photo
   owner = db.Column(db.Integer, db.ForeignKey('user.id'))
   likes = db.Column(db.Integer, db.ForeignKey('like.id'))
+  image = db.Column(db.String, nullable=True)
   def __str__(self):
     return
 

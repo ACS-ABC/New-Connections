@@ -4,6 +4,7 @@ from wtforms import StringField, DateField, SelectField, SubmitField, IntegerFie
 from wtforms_sqlalchemy import fields
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
 from FlaskApp.models import Post, User, Comment
+from pyuploadcare_wtforms import ImageField
 
 class PostForm(FlaskForm):
   time = DateField('Time of Event')
@@ -16,7 +17,9 @@ class PostForm(FlaskForm):
     validators=[
       DataRequired()
     ])
+  image = ImageField()
   submit = SubmitField('Submit')
+
 
 class LoginForm(FlaskForm):
   username = StringField('Username',
@@ -49,6 +52,8 @@ class EditAccountForm(FlaskForm):
     ])
   profile_bio = StringField('Bio')
   submit = SubmitField('Submit')
+  image = ImageField()
+  # in imagefield class manual_crop='100x100'
 
 class CommentForm(FlaskForm):
   content = StringField('Comment')
