@@ -11,5 +11,5 @@ pip3 install -r requirements.txt
 Then you can run the server:
 
 ```
-python3 app.py
+flask run
 ```
