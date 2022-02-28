@@ -15,17 +15,22 @@
   {{post.likes}}
 
   {% endfor %}
-  <div class="card mb-3">
-    <p>Profile Name</p>
-    <img src="{{url_for('static', filename='IMAGES/kanye-west-donda-album-listening-party.jpg')}}" class="card-img-top" alt="Post">
-    <div class="card-body">
-      <h5 class="card-title">Post Title</h5>
-      <p class="card-text">This is a caption/small paragrapgh for hobby.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
+  <link rel="stylesheets" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+  <!--import CSS-->
+
+  <div class="d-flex bd-highlight">
+    <div class="p-2 flex-fill bd-highlight">Title of Post</div>
+    <img src="{{url_for('static', filename='IMAGES/Comments.jpg')}}" class="comment" alt="comment">Comments</img>
+    <img src="{{url_for('static', filename='IMAGES/Heart.jpg')}}" class="like" alt="like">Likes</img>
   </div>
 
-
+  <div class="card mb-3">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <p>Category</p>
+      <h5 class="card-title">Profile Name</h5>
+    </div>
+  </div>
 
 
 {% endblock %}
