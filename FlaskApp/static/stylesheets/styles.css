@@ -15,3 +15,8 @@ body {
   left: 1080px;
   top: 184px;
 }
+
+.new-post {
+  height: 100px;
+  width: 100px;
+}
