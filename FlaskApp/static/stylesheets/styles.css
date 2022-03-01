@@ -17,6 +17,13 @@ body {
 }
 
 .new-post {
-  height: 100px;
-  width: 100px;
+  max-height: 300px;
+  max-width: 300px;
+}
+
+.icons {
+  height: 500px;
+  width: 500px;
+  padding: 40px;
+  font-size: 5000px;
 }
