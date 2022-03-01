@@ -4,13 +4,18 @@ from FlaskApp.forms import CommentForm, LoginForm, PostForm, SignUpForm, EditAcc
 from FlaskApp.models import Post, User, Comment, Like
 from flask_login import current_user, login_required, login_user, logout_user
 from FlaskApp import db, app
+from pyuploadcare import conf
+import os
+conf.pub_key = 'a28dc94fd312582d031c'
+conf.secret = os.environ.get('UPLOAD_CARE_SECRET')
+
 main = Blueprint('main', __name__)
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
 
 # object.image._value() syntax for url to query uploadcare
-
+# response = request.get("https://api.open-notify.org/astros.json")
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -71,7 +76,7 @@ def display_feed(user_id):
 @login_required
 def create_post(user_id):
   form = PostForm()
-  if form.validate_on_submit():
+  if form.validate_on_submit():  
     new_post = Post(
       time_created = form.time.data,
       title = form.title.data,

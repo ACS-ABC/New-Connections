@@ -21,11 +21,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 migrate.init_app(db, app)
 
-
-
-
-
-
 from FlaskApp.routes import main
 
 app.register_blueprint(main)
