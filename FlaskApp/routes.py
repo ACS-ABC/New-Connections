@@ -7,7 +7,7 @@ from FlaskApp import db, app
 
 main = Blueprint('main', __name__)
 login_manager = LoginManager()
-login_manager.login_view = 'auth.login'
+login_manager.login_view = 'main.login_page'
 login_manager.init_app(app)
 
 
