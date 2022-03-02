@@ -3,7 +3,6 @@ from flask import flash
 from wtforms import StringField, DateField, SelectField, SubmitField, IntegerField
 from wtforms_sqlalchemy import fields
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
-from FlaskApp.models import Post, User, Comment
 
 
 class PostForm(FlaskForm):
