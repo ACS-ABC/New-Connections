@@ -4,10 +4,6 @@ from FlaskApp.forms import CommentForm, LoginForm, PostForm, SignUpForm, EditAcc
 from FlaskApp.models import Post, User, Comment, Like
 from flask_login import current_user, login_required, login_user, logout_user
 from FlaskApp import db, app
-from pyuploadcare import conf
-import os
-conf.pub_key = 'a28dc94fd312582d031c'
-conf.secret = os.environ.get('UPLOAD_CARE_SECRET')
 
 main = Blueprint('main', __name__)
 login_manager = LoginManager()

@@ -2,12 +2,11 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_migrate import Migrate
-from pyuploadcare import conf
+
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-conf.pub_key = 'mypublicley'
-conf.secret = os.environ.get('UPLOAD_CARE_SECRET')
+
 
 
 migrate = Migrate(compare_type=True)
