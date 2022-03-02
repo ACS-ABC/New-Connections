@@ -18,9 +18,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
-# migrate.init_app(db, app)
+#migrate.init_app(db, app)
 
 from FlaskApp.routes import main
 
 app.register_blueprint(main)
 
+with app.app_context():
+  db.create_all()
