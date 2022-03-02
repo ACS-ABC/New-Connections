@@ -20,7 +20,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-conn = psycopg2.connect(uri, sslmode='require')
+conn = psycopg2.connect(
+  dbname='d4n6hcaulpeumg',
+  user='xlgcwbjezjifrp',
+  password='8bded6d11509b4cde65f4213be50750c694e589f6fdead71852831417761f26c',
+  host='ec2-54-156-110-139.compute-1.amazonaws.com',
+  sslmode='require')
 
 db.init_app(app)
 
