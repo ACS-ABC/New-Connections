@@ -25,7 +25,9 @@ conn = psycopg2.connect(
   user='xlgcwbjezjifrp',
   password='8bded6d11509b4cde65f4213be50750c694e589f6fdead71852831417761f26c',
   host='ec2-54-156-110-139.compute-1.amazonaws.com',
-  sslmode='require')
+  port=5432
+  )
+  #sslmode='require'
 
 db.init_app(app)
 
