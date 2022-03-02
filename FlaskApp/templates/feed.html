@@ -7,13 +7,30 @@
 {% block content %}
 
   {% for post in posts %}
-  <!-- post content here 
-  post.time_created
-  post.title
-  post.description
-  post.owner
-  post.likes
-  -->
+
+  <link rel="stylesheets" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+
+  <div class="card bg-light mb-3 mx-auto mt-5 w-50" >
+    <div class="card-header">{{post.title}}</div>
+    <div class="card-body">
+      <h2>{{ post.description }}</h2>
+      <a href="/account-profile/{{post.owner}}"><h2>{{ post.author }}</h2></a>
+      <p>{{ post.time_created }}</p>
+    </div>
+  </div>
+
+  <!-- {% for comment in comments %}
+    {% if comment.post == post.id %}
+      <p>{{comment.content}}</p>
+    {% endif %}
   {% endfor %}
+
+  {{ form.content }}
+  <div style="display: none;" value="{{post.id}}">
+    {{ form.post }}
+  </div>
+  {{form.submit}} -->
+  {% endfor %}
+
 
 {% endblock %}

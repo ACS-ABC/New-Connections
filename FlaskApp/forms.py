@@ -1,11 +1,17 @@
 from flask_wtf import FlaskForm
+from flask import flash
 from wtforms import StringField, DateField, SelectField, SubmitField, IntegerField
 from wtforms_sqlalchemy import fields
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
 from FlaskApp.models import Post, User, Comment
+from pyuploadcare_wtforms import ImageField, FileField
+from pyuploadcare import conf
+import os
+conf.pub_key = 'a28dc94fd312582d031c'
+conf.secret = os.environ.get('UPLOAD_CARE_SECRET')
 
 class PostForm(FlaskForm):
-  time_created = DateField
+  time = DateField('Time of Event')
   title = StringField('Post Title',
     validators=[
       DataRequired(),
@@ -15,7 +21,9 @@ class PostForm(FlaskForm):
     validators=[
       DataRequired()
     ])
+  #image = ImageField()
   submit = SubmitField('Submit')
+
 
 class LoginForm(FlaskForm):
   username = StringField('Username',
@@ -27,31 +35,16 @@ class LoginForm(FlaskForm):
     DataRequired(),
     Length(min=4, max=20, message=None)])
   submit = SubmitField('Submit')
-
+  
 class SignUpForm(FlaskForm):
-  username = StringField('Username',
-    validators=[
-      DataRequired(),
-      Length(min=4, max=20, message=None)])
-  password = StringField('Password',
-    validators=[
-      DataRequired(),
-      Length(min=4, max=20, message=None)])
-  email = StringField('Email',
-    validators=[
-      DataRequired()
-    ])
-  name = StringField('Name',
-    validators=[
-      DataRequired()
-    ])
-  age = IntegerField('Age',
-    validators=[
-      DataRequired(),
-      NumberRange(min=18,max=None,message='Must be above 18 yeard old')
-      ])
-  profile_bio = StringField('Bio')
+  username = StringField('Username')
+  password = StringField('Password')
   submit = SubmitField('Submit')
+  
+  # def validate_username(self, username):
+  #   user = User.query.filter_by(username=username.data).first()
+  #   if user:
+  #     raise ValidationError('That username is taken. Please choose a different one.')
 
 class EditAccountForm(FlaskForm):
   username = StringField('Username',
@@ -64,7 +57,10 @@ class EditAccountForm(FlaskForm):
     ])
   profile_bio = StringField('Bio')
   submit = SubmitField('Submit')
+  #image = ImageField()
+  # in imagefield class manual_crop='100x100'
 
 class CommentForm(FlaskForm):
   content = StringField('Comment')
+  post = IntegerField()
   submit = SubmitField('Submit')
