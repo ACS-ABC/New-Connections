@@ -4,11 +4,7 @@ from wtforms import StringField, DateField, SelectField, SubmitField, IntegerFie
 from wtforms_sqlalchemy import fields
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
 from FlaskApp.models import Post, User, Comment
-from pyuploadcare_wtforms import ImageField, FileField
-from pyuploadcare import conf
-import os
-conf.pub_key = 'a28dc94fd312582d031c'
-conf.secret = os.environ.get('UPLOAD_CARE_SECRET')
+
 
 class PostForm(FlaskForm):
   time = DateField('Time of Event')

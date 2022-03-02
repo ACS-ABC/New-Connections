@@ -4,18 +4,11 @@ from FlaskApp.forms import CommentForm, LoginForm, PostForm, SignUpForm, EditAcc
 from FlaskApp.models import Post, User, Comment, Like
 from flask_login import current_user, login_required, login_user, logout_user
 from FlaskApp import db, app
-from pyuploadcare import conf
-import os
-conf.pub_key = 'a28dc94fd312582d031c'
-conf.secret = os.environ.get('UPLOAD_CARE_SECRET')
 
 main = Blueprint('main', __name__)
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
-
-# object.image._value() syntax for url to query uploadcare
-# response = request.get("https://api.open-notify.org/astros.json")
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -23,6 +16,8 @@ def load_user(user_id):
 @main.route('/')
 def landing_page():
   return render_template('landing_page.html')
+
+#------------------Auth------------------------------------------------------------
 
 @main.route('/sign-up', methods = ['GET', 'POST'])
 def sign_up_page():
@@ -56,22 +51,24 @@ def login_page():
       flash('No user with that username. Please try again.')
   return render_template('login_page.html', form=form)
 
+#------------------content------------------------------------------------------------
+
 @main.route('/feed/<user_id>', methods = ['GET', 'POST'])
 def display_feed(user_id):
   user = current_user
   posts = Post.query.all()
-  # comments = Comment.query.all()
+  comments = Comment.query.all()
   form = CommentForm()
-  # if form.validate_on_submit():
-  #   new_comment = Comment(
-  #     content = form.content.data,
-  #     author_id = user_id,
-  #     post_id = form.post.data
-  #   )
-  #   db.session.add(new_comment)
-  #   db.session.commit()
+  if form.validate_on_submit():
+    new_comment = Comment(
+      content = form.content.data,
+      author_id = user_id,
+      post_id = form.post.data
+    )
+    db.session.add(new_comment)
+    db.session.commit()
 
-  #   return render_template('feed.html', posts=posts, user=user, form=form, comments=comments)
+    return render_template('feed.html', posts=posts, user=user, form=form, comments=comments)
   return render_template('feed.html', posts=posts, user=user, form=form)
 
 @main.route('/create-post/<user_id>', methods = ['GET', 'POST'])
