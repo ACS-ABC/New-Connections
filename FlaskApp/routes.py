@@ -13,9 +13,6 @@ login_manager.init_app(app)
 # with app.app_context():
 #   db.create_all()
 
-# object.image._value() syntax for url to query uploadcare
-# response = request.get("https://api.open-notify.org/astros.json")
-
 @login_manager.user_loader
 def load_user(user_id):
   return User.query.get(user_id)

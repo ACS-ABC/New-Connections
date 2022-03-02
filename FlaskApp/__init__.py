@@ -30,6 +30,7 @@ conn = psycopg2.connect(
   host='ec2-54-156-110-139.compute-1.amazonaws.com',
   port=5432
   )
+
   #sslmode='require'
 
 db.app = app
