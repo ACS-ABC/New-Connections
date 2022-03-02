@@ -13,7 +13,7 @@ conf.secret = os.environ.get('UPLOAD_CARE_SECRET')
 migrate = Migrate(compare_type=True)
 
 db = SQLAlchemy()
-uri = os.environ.get('DATABASE_URL')
+uri = os.environ.get('DATABASE_URI')
 print(uri)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
