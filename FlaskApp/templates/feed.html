@@ -9,12 +9,11 @@
   {% for post in posts %}
 
   <link rel="stylesheets" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
-
   <div class="card bg-light mb-3 mx-auto mt-5 w-50" >
     <div class="card-header">{{post.title}}</div>
     <div class="row g-0">
       <div class="col-md-4">
-        <img src="{{url_for('static', filename='IMAGES/PFPexample.jpg')}}" class="img-fluid rounded-start" alt="...">
+        <img src="{{url_for('static', filename='IMAGES/chess.png')}}" class="img-fluid rounded-start" alt="...">
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -22,9 +21,8 @@
         </div>
       </div>
     </div>
-    <div class="row g-0">
-      
-      <div class="d-flex flex-column align-items-end">
+    <div class="d-flex flex-direction-row">
+      <div class="justify-content-around">
         <img
           src="{{url_for('static', filename='IMAGES/PFPexample.jpg')}}"
           alt="Generic placeholder image"
@@ -33,7 +31,7 @@
         />
         <a href="/account-profile/{{post.owner}}"><p class="card-text"><small class="text-muted">{{ post.author }}</p></a>
         <p class="card-text"><small class="text-muted">{{ post.time_created }}</p>
-        </div>
+      </div>
     </div>
   </div>
 
