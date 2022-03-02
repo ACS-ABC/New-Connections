@@ -22,8 +22,8 @@
 
             <!-- NAME  -->
             <div class="ms-3" style="margin-top: 130px">
-              <h5>{{user.name}}</h5>
-              <p>{{user.username}}</p>
+              <h5>{{profile.name}}</h5>
+              <p>{{profile.username}}</p>
             </div>
 
 
@@ -37,7 +37,7 @@
                 </svg>
                 <a class="small text-muted mb-0 hover-overlay">Contact</a>
               </div>
-              {% if user == current_user %}
+              {% if profile == current_user %}
               <div class="p-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16" href="/account-profile/{{user.id}}/edit">
                   <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
@@ -54,7 +54,7 @@
 
               <!-- ABOUT SECTION  -->
               <div class="p-4" style="background-color: #f8f9fa">
-                <p class="font-italic mb-1">{{user.profile_bio}}</p>
+                <p class="font-italic mb-1">{{profile.profile_bio}}</p>
               </div>
 
             </div>
