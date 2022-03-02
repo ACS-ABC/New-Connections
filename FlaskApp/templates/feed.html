@@ -13,14 +13,23 @@
   <div class="card bg-light mb-3 mx-auto mt-5 w-50" >
     <div class="card-header">{{post.title}}</div>
     <div class="card-body">
-
-      <img class="card-img-top" src="..." alt="Card image cap">
-      
-      <p class="card-text">{{post.description}}</p>
-
-      <p class="card-text"><small class="text-muted">{{post.time_created}}</small></p>
+      <h2>{{ post.description }}</h2>
+      <a href="/account-profile/{{post.owner}}"><h2>{{ post.author }}</h2></a>
+      <p>{{ post.time_created }}</p>
     </div>
   </div>
+
+  <!-- {% for comment in comments %}
+    {% if comment.post == post.id %}
+      <p>{{comment.content}}</p>
+    {% endif %}
+  {% endfor %}
+
+  {{ form.content }}
+  <div style="display: none;" value="{{post.id}}">
+    {{ form.post }}
+  </div>
+  {{form.submit}} -->
   {% endfor %}
 
 
