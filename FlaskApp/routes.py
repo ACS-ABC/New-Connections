@@ -60,28 +60,32 @@ def login_page():
 def display_feed(user_id):
   user = current_user
   posts = Post.query.all()
+  # comments = Comment.query.all()
   form = CommentForm()
-  if form.validate_on_submit():
-    new_comment = Comment(
-      content = form.content.data,
-      author_id = user_id,
-      # post_id = somelogic
-    )
-    db.session.add(new_comment)
-    db.session.commit()
-    return
-  return render_template('feed.html', posts=posts, user=user)
+  # if form.validate_on_submit():
+  #   new_comment = Comment(
+  #     content = form.content.data,
+  #     author_id = user_id,
+  #     post_id = form.post.data
+  #   )
+  #   db.session.add(new_comment)
+  #   db.session.commit()
+
+  #   return render_template('feed.html', posts=posts, user=user, form=form, comments=comments)
+  return render_template('feed.html', posts=posts, user=user, form=form)
 
 @main.route('/create-post/<user_id>', methods = ['GET', 'POST'])
 @login_required
 def create_post(user_id):
   form = PostForm()
-  if form.validate_on_submit():  
+  if form.is_submitted():
+    author = User.query.get(user_id).username
     new_post = Post(
       time_created = form.time.data,
       title = form.title.data,
-      description = form.title.data,
-      owner = user_id
+      description = form.description.data,
+      owner = user_id,
+      author = author
     )
     db.session.add(new_post)
     db.session.commit()
@@ -92,8 +96,9 @@ def create_post(user_id):
 @main.route('/account-profile/<user_id>')
 @login_required
 def account_profile(user_id):
-  user = current_user
-  return render_template('account_profile.html', user=user)
+  user_profile = User.query.get(user_id)
+  posts = Post.query.filter_by(owner=user_id)
+  return render_template('account_profile.html', user=user_profile, posts=posts)
 
 @main.route('/account-profile/<user_id>/edit', methods = ['GET', 'POST'])
 @login_required

@@ -30,10 +30,22 @@
     <img src="..." class="new-post" alt="post">
     <div class="card-body">
       <h2>{{ post.description }}</h2>
-      <h2>{{ post.owner }}</h2>
+      <a href="/account-profile/{{post.owner}}"><h2>{{ post.author }}</h2></a>
       <p>{{ post.time_created }}</p>
     </div>
   </div>
+
+  <!-- {% for comment in comments %}
+    {% if comment.post == post.id %}
+      <p>{{comment.content}}</p>
+    {% endif %}
+  {% endfor %}
+
+  {{ form.content }}
+  <div style="display: none;" value="{{post.id}}">
+    {{ form.post }}
+  </div>
+  {{form.submit}} -->
   {% endfor %}
 
 
