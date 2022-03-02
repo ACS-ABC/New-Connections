@@ -95,7 +95,7 @@ def create_post(user_id):
 def account_profile(user_id):
   user_profile = User.query.get(user_id)
   posts = Post.query.filter_by(owner=user_id)
-  return render_template('account_profile.html', user=user_profile, posts=posts)
+  return render_template('account_profile.html', user=user_profile, posts=posts, current_user=current_user)
 
 @main.route('/account-profile/<user_id>/edit', methods = ['GET', 'POST'])
 @login_required
