@@ -12,10 +12,28 @@
 
   <div class="card bg-light mb-3 mx-auto mt-5 w-50" >
     <div class="card-header">{{post.title}}</div>
-    <div class="card-body">
-      <h2>{{ post.description }}</h2>
-      <a href="/account-profile/{{post.owner}}"><h2>{{ post.author }}</h2></a>
-      <p>{{ post.time_created }}</p>
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{url_for('static', filename='IMAGES/PFPexample.jpg')}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5>{{ post.description }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="row g-0">
+      
+      <div class="d-flex flex-column align-items-end">
+        <img
+          src="{{url_for('static', filename='IMAGES/PFPexample.jpg')}}"
+          alt="Generic placeholder image"
+          class="img-fluid img-thumbnail mt-4 mb-2 "
+          style="width: 50px; z-index: 1"
+        />
+        <a href="/account-profile/{{post.owner}}"><p class="card-text"><small class="text-muted">{{ post.author }}</p></a>
+        <p class="card-text"><small class="text-muted">{{ post.time_created }}</p>
+        </div>
     </div>
   </div>
 

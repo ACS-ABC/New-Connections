@@ -10,6 +10,8 @@ login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
 
+# with app.app_context():
+#   db.create_all()
 
 # object.image._value() syntax for url to query uploadcare
 # response = request.get("https://api.open-notify.org/astros.json")
