@@ -18,6 +18,7 @@ uri = os.environ.get('DATABASE_URI')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
 
 
 conn = psycopg2.connect(
@@ -29,7 +30,7 @@ conn = psycopg2.connect(
   )
   #sslmode='require'
 
-db.init_app(app)
+db.app = app
 
 migrate.init_app(db, app)
 
