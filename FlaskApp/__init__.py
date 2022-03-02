@@ -2,6 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_migrate import Migrate
+import psycopg2
+
 
 
 app = Flask(__name__)
@@ -12,17 +14,30 @@ app.secret_key = os.urandom(24)
 migrate = Migrate(compare_type=True)
 
 db = SQLAlchemy()
-uri = os.environ.get('DATABASE_URI')
-print(uri)
+
+# uri = os.environ.get('DATABASE_URI')
+uri = 'postgres://xlgcwbjezjifrp:8bded6d11509b4cde65f4213be50750c694e589f6fdead71852831417761f26c@ec2-54-156-110-139.compute-1.amazonaws.com:5432/d4n6hcaulpeumg'
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db.init_app(app)
+
+
+
+conn = psycopg2.connect(
+  dbname='d4n6hcaulpeumg',
+  user='xlgcwbjezjifrp',
+  password='8bded6d11509b4cde65f4213be50750c694e589f6fdead71852831417761f26c',
+  host='ec2-54-156-110-139.compute-1.amazonaws.com',
+  port=5432
+  )
+
+  #sslmode='require'
+
+db.app = app
+
 migrate.init_app(db, app)
 
 from FlaskApp.routes import main
 
 app.register_blueprint(main)
 
-with app.app_context():
-  db.create_all()

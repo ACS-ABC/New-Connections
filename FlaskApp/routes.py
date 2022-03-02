@@ -7,9 +7,15 @@ from FlaskApp import db, app
 
 main = Blueprint('main', __name__)
 login_manager = LoginManager()
-login_manager.login_view = 'auth.login'
+login_manager.login_view = 'main.login_page'
 login_manager.init_app(app)
 
+<<<<<<< HEAD
+=======
+# with app.app_context():
+#   db.create_all()
+
+>>>>>>> main
 @login_manager.user_loader
 def load_user(user_id):
   return User.query.get(user_id)
@@ -54,6 +60,7 @@ def login_page():
 #------------------content------------------------------------------------------------
 
 @main.route('/feed/<user_id>', methods = ['GET', 'POST'])
+@login_required
 def display_feed(user_id):
   user = current_user
   posts = Post.query.all()
@@ -95,7 +102,7 @@ def create_post(user_id):
 def account_profile(user_id):
   user_profile = User.query.get(user_id)
   posts = Post.query.filter_by(owner=user_id)
-  return render_template('account_profile.html', user=user_profile, posts=posts)
+  return render_template('account_profile.html', user=current_user, posts=posts, profile=user_profile)
 
 @main.route('/account-profile/<user_id>/edit', methods = ['GET', 'POST'])
 @login_required
