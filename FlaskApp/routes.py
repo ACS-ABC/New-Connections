@@ -54,6 +54,7 @@ def login_page():
   return render_template('login_page.html', form=form)
 
 @main.route('/feed/<user_id>', methods = ['GET', 'POST'])
+@login_required
 def display_feed(user_id):
   user = current_user
   posts = Post.query.all()
