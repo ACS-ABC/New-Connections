@@ -4,13 +4,13 @@
   </li>
   {% if current_user.is_authenticated %}
   <li class="nav-item">
-    <a class="nav-link link-dark" href="/account-profile/{{current_user.id}}">Profile</a>
+    <a class="nav-link link-dark" href="/account-profile/{{user.id}}">Profile</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link link-dark" href="/feed/{{current_user.id}}">Home</a>
+    <a class="nav-link link-dark" href="/feed/{{user.id}}">Home</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link link-dark" href="/create-post/{{current_user.id}}">Create Post</a>
+    <a class="nav-link link-dark" href="/create-post/{{user.id}}">Create Post</a>
   </li>
   <li class="nav-item">
     <a class="nav-link link-dark" href="/logout">Logout</a>
