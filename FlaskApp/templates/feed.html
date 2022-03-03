@@ -33,19 +33,17 @@
         <p class="card-text"><small class="text-muted">{{ post.time_created }}</p>
       </div>
     </div>
+    {% for comment in comments %}
+            <p>{{comment.content}}</p>
+    {% endfor %}
+      <form  action="/feed/{{user.id}}" method="POST">
+        {{form.content}}
+      <div style="display: none;" value="{{post.id}}">{{form.post}}</div>
+      <div style="display: none;">{{form.submit}}</div>
+      </form>
+    
   </div>
 
-  <!-- {% for comment in comments %}
-    {% if comment.post == post.id %}
-      <p>{{comment.content}}</p>
-    {% endif %}
-  {% endfor %}
-
-  {{ form.content }}
-  <div style="display: none;" value="{{post.id}}">
-    {{ form.post }}
-  </div>
-  {{form.submit}} -->
   {% endfor %}
 
 

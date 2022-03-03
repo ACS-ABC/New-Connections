@@ -10,12 +10,9 @@ login_manager = LoginManager()
 login_manager.login_view = 'main.login_page'
 login_manager.init_app(app)
 
-<<<<<<< HEAD
-=======
 # with app.app_context():
 #   db.create_all()
 
->>>>>>> main
 @login_manager.user_loader
 def load_user(user_id):
   return User.query.get(user_id)
@@ -66,17 +63,22 @@ def display_feed(user_id):
   posts = Post.query.all()
   comments = Comment.query.all()
   form = CommentForm()
-  if form.validate_on_submit():
+  if form.is_submitted():
+    print(1)
     new_comment = Comment(
       content = form.content.data,
-      author_id = user_id,
+      author = user_id,
+      owner = user.username,
       post_id = form.post.data
     )
     db.session.add(new_comment)
     db.session.commit()
+    print(new_comment.content)
+    print(new_comment.post_id)
 
-    return render_template('feed.html', posts=posts, user=user, form=form, comments=comments)
-  return render_template('feed.html', posts=posts, user=user, form=form)
+
+    return render_template('feed.html', posts=posts, user=user, form=form, comments=Comment.query.all())
+  return render_template('feed.html', posts=posts, user=user, form=form, comments = comments)
 
 @main.route('/create-post/<user_id>', methods = ['GET', 'POST'])
 @login_required

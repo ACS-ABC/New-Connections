@@ -57,5 +57,5 @@ class EditAccountForm(FlaskForm):
 
 class CommentForm(FlaskForm):
   content = StringField('Comment')
-  post = IntegerField()
+  post = IntegerField('Post')
   submit = SubmitField('Submit')

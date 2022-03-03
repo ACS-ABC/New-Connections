@@ -40,7 +40,8 @@ class Post(db.Model):
 class Comment(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   content = db.Column(db.String, nullable=False)
-  author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+  author = db.Column(db.String, nullable=False)
+  owner = db.Column(db.Integer, db.ForeignKey('user.id'))
   post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
   def __str__(self):
     return
