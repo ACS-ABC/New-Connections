@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request, flash, redirect
+from flask import Blueprint, render_template, request, flash, redirect
 from flask_login import LoginManager
 from FlaskApp.forms import CommentForm, LoginForm, PostForm, SignUpForm, EditAccountForm
 from FlaskApp.models import Post, User, Comment, Like
@@ -10,8 +10,8 @@ login_manager = LoginManager()
 login_manager.login_view = 'main.login_page'
 login_manager.init_app(app)
 
-# with app.app_context():
-#   db.create_all()
+with app.app_context():
+   db.create_all()
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -67,8 +67,8 @@ def display_feed(user_id):
     print(1)
     new_comment = Comment(
       content = form.content.data,
-      author = user_id,
-      owner = user.username,
+      author = user.username,
+      owner = user_id,
       post_id = form.post.data
     )
     db.session.add(new_comment)
@@ -115,6 +115,8 @@ def edit_profile(user_id):
     user.username = form.username.data
     user.name = form.name.data
     user.profile_bio = form.profile_bio.data
+    db.session.add(user)
+    db.session.commit()
     return redirect(f'/account-profile.html/{user_id}')
   return render_template('edit_profile.html', user=user, form=form)
 
@@ -123,3 +125,30 @@ def edit_profile(user_id):
 def logout():
   logout_user()
   return redirect('/')
+
+#------DELETE----------------------------------------------------------------------
+
+@main.route('/delete-user/<user_id>')
+@login_required
+def delete_user(user_id):
+  user = User.query.get(user_id)
+  logout_user()
+  db.session.delete(user)
+  db.session.commit()
+  return redirect('/')
+@main.route('/delete-post/<post_id>')
+@login_required
+def delete_post(post_id):
+  post = Post.query.get(post_id)
+  db.session.delete(post)
+  db.session.commit()
+  return redirect(f'/feed/{current_user.id}')
+
+@main.route('/delete-comment/<comment_id>')
+@login_required
+def delete_comment(comment_id):
+  comment = Comment.query.get(comment_id)
+  db.session.delete(comment)
+  db.session.commit()
+  return redirect(f'/feed/{current_user.id}')
+

@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_migrate import Migrate
 import psycopg2
-
+import dotenv
 
 
 app = Flask(__name__)
